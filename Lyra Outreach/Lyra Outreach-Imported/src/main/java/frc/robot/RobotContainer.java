@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AlternatePurpleGreen;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Intake;
@@ -16,6 +17,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.FlipperSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -27,6 +29,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+
+  private final Spark bliken = new Spark(6);
   // The robot's subsystems and commands are defined here...
 private final DriveTrainSubsystem d = new DriveTrainSubsystem();
 private final IntakeSubsystem i = new IntakeSubsystem();
@@ -58,10 +62,15 @@ private final ShooterSubsystem s = new ShooterSubsystem();
     m_driverController.a().whileTrue(new Shoot(s, a));
 
     m_driverController.b().onTrue(new Intake(f, i, a));
+
   }
 
   public void teleopPeriodic(){
     f.TestFlipper(m_driverController.getRightY());
+  }
+
+  public void periodic(){
+    
   }
 
   /**
